@@ -1,9 +1,28 @@
 pipeline {
   agent any
+    
   tools {nodejs "node"}
+    
   stages {
-    stage('Build') {
+        
+    stage('Git') {
       steps {
         git 'https://github.com/GokulNathInfotech/testing.git'
-        bat 'npm install'
-      }}}}
+      }
+    }
+     
+    stage('Build') {
+      steps {
+        sh 'npm install'
+         sh '<<Build Command>>'
+      }
+    }  
+    
+            
+    stage('Test') {
+      steps {
+        sh 'node test'
+      }
+    }
+  }
+}
